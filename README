@@ -54,12 +54,7 @@ And enjoy with engine:
                         new
                         {
                             @title = "Java",
-                            @description = @"Java is a programming language originally developed by 
-                                                           James Gosling at Sun Microsystems (which is now a subsidiary 
-                                                           of Oracle Corporation) and released in 1995 as a core component 
-                                                           of Sun Microsystems' Java platform. The language derives much of 
-                                                           its syntax from C and C++ but has a simpler object model and fewer 
-                                                           low-level facilities."
+                            @description = @"Java is a programming language ..."
                         });
 
             Console.WriteLine("Inserted {0} rows", affectedRows);
@@ -68,7 +63,7 @@ And enjoy with engine:
                         new
                         {
                             @title = "Ruby",
-                            @description = @"A dynamic, open source programming language with a focus on simplicity and productivity."
+                            @description = @"A dynamic, open source ..."
                         });
 
             Console.WriteLine("Inserted {0} rows", affectedRows);
@@ -77,11 +72,7 @@ And enjoy with engine:
                         new
                         {
                             @title = "C#",
-                            @description = @"C# (pronounced 'see sharp') is a multi-paradigm programming language encompassing 
-                                                imperative, declarative, functional, generic, object-oriented (class-based), 
-                                                and component-oriented programming disciplines. 
-                                                It was developed by Microsoft within the .NET initiative and later approved as a standard by 
-                                                Ecma (ECMA-334) and ISO (ISO/IEC 23270). "
+                            @description = @"C# (pronounced 'see sharp') is a ... "
                         });
 
             Console.WriteLine("Inserted {0} rows", affectedRows);
