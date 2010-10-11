@@ -1,0 +1,1 @@
+D:/Install/Devel/Microsoft/Testing/xunit-1.5/xunit.console.exe D:/Projects/Simple-sqlite-query-engine/SSQE.Test/bin/Debug/SSQE.Test.dll
