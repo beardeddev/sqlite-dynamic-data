@@ -68,7 +68,7 @@ namespace SSQE.Test
         }
 
         [Fact]
-        public void Test_Should_Query_For_Count()
+        public void Test_Should_ScalarQuery_For_Count()
         {
             var db = new TestDb();
 
@@ -81,12 +81,12 @@ namespace SSQE.Test
                                                             inserts character entity references for apostrophes, opening and closing 
                                                             single and double quotation marks, ellipses and em dashes.");
 
-            var res = db.Query(@"SELECT COUNT(*) as RecordsCount 
+            var res = db.ScalarQuery(@"SELECT COUNT(*) as RecordsCount 
                                     FROM dictionary");
 
             Assert.NotNull(res);
-            Assert.NotEqual(0, res.Count);
-            Assert.NotEqual(0, res[0].RecordsCount);
+            Assert.NotEqual(0, res);
+            Assert.NotEqual(0, res);
         }
 
         [Fact]

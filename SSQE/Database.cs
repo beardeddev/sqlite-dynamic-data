@@ -22,6 +22,29 @@ namespace SSQE
     {
         private string _ConnectionString;
 
+
+        /// <summary>
+        /// Get instance of SQLiteCommand with query params
+        /// </summary>
+        /// <param name="conn">Connection to database</param>
+        /// <param name="query">SQL Query string</param>
+        /// <param name="parameters">Query parameters</param>
+        /// <returns>Instance of SQLiteCommand to be executed</returns>
+        private SQLiteCommand GetCommand(SQLiteConnection conn, string query, params object[] parameters)
+        {
+            SQLiteCommand comm = new SQLiteCommand(query, conn);
+            if (parameters != null)
+            {
+                for (int i = 0; i < parameters.Length; i++)
+                {
+                    string parameterName = string.Format("@{0}", i);
+                    SQLiteParameter p = new SQLiteParameter(parameterName, parameters[i]);
+                    comm.Parameters.Add(p);
+                }
+            }
+            return comm;
+        }
+
         /// <summary>
         /// Creates new instance of database for querying
         /// </summary>
@@ -90,17 +113,7 @@ namespace SSQE
             using(SQLiteConnection conn = new SQLiteConnection(this._ConnectionString))
             {
                 conn.Open();
-                SQLiteCommand comm = new SQLiteCommand(query, conn);
-                if (parameters != null)
-                {
-                    for (int i = 0; i < parameters.Length; i++)
-                    {
-                        string parameterName = string.Format("@{0}", i);
-                        SQLiteParameter p = new SQLiteParameter(parameterName, parameters[i]);
-                        comm.Parameters.Add(p);
-                    }
-                }
-
+                SQLiteCommand comm = GetCommand(conn, query, parameters);
                 SQLiteDataReader dr = comm.ExecuteReader();
                 if (dr.HasRows)
                 {
@@ -132,14 +145,69 @@ namespace SSQE
         /// <example>
         /// <code>
         /// var db = Database.Open("demo");
-        /// var c = db.Query("SELECT COUNT(*) AS Count FROM dictionary");
+        /// var res = db.Query("SELECT * FROM dictionary");
         /// 
-        /// Console.WriteLine("Count of record is {0}", c[0].Count);
+        /// foreach (var r in res)
+        /// {
+        ///     Console.WriteLine("{0}\t{1}\t...", r.id, r.title);
+        /// }
         /// </code>
         /// </example>
         public dynamic Query(string query)
         {
             return Query(query, null);
+        }
+
+        /// <summary>
+        /// Executes the query, and returns the first column of the first row in the result set returned by the query. 
+        /// Additional columns or rows are ignored.
+        /// </summary>
+        /// <param name="query">Query string</param>
+        /// <param name="parameters">Parameters for query command</param>
+        /// <returns>
+        /// The first column of the first row in the result set, or a null reference (Nothing in Visual Basic) if the result set is empty.
+        /// Returns a maximum of 2033 characters.
+        /// </returns>
+        /// <example>
+        /// <code>
+        /// var db = Database.Open("demo");
+        /// var c = db.Query("SELECT COUNT(*) FROM dictionary WHERE title = @0", "ruby");
+        /// 
+        /// Console.WriteLine("Count of record is {0}", c);
+        /// </code>
+        /// </example>
+        public object ScalarQuery(string query, params object[] parameters)
+        {
+            object res = null;
+            using (SQLiteConnection conn = new SQLiteConnection(this._ConnectionString))
+            {
+                conn.Open();
+                SQLiteCommand comm = GetCommand(conn, query, parameters);
+                res = comm.ExecuteScalar();
+            }
+            return res;
+        }
+
+        /// <summary>
+        /// Executes the query, and returns the first column of the first row in the result set returned by the query. 
+        /// Additional columns or rows are ignored.
+        /// </summary>
+        /// <param name="query">Query string</param>
+        /// <returns>
+        /// The first column of the first row in the result set, or a null reference (Nothing in Visual Basic) if the result set is empty.
+        /// Returns a maximum of 2033 characters.
+        /// </returns>
+        /// <example>
+        /// <code>
+        /// var db = Database.Open("demo");
+        /// var c = db.Query("SELECT COUNT(*) FROM dictionary");
+        /// 
+        /// Console.WriteLine("Count of record is {0}", c);
+        /// </code>
+        /// </example>
+        public object ScalarQuery(string query)
+        {
+            return ScalarQuery(query, null);
         }
 
         /// <summary>
@@ -168,16 +236,7 @@ namespace SSQE
             using (SQLiteConnection conn = new SQLiteConnection(this._ConnectionString))
             {
                 conn.Open();
-                SQLiteCommand comm = new SQLiteCommand(query, conn);
-                if (parameters != null)
-                {
-                    for (int i = 0; i < parameters.Length; i++)
-                    {
-                        string parameterName = string.Format("@{0}", i);
-                        SQLiteParameter p = new SQLiteParameter(parameterName, parameters[i]);
-                        comm.Parameters.Add(p);
-                    }
-                }
+                SQLiteCommand comm = GetCommand(conn, query, parameters);                
                 res = comm.ExecuteNonQuery();                
             }
             return res;
