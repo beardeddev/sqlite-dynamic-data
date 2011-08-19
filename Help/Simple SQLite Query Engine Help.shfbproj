@@ -1,4 +1,5 @@
-﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <!-- The configuration and platform will be used to determine which
          assemblies to include from solution and project documentation
@@ -7,7 +8,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{9d852695-c7fa-4b78-ada7-6fc349f11444}</ProjectGuid>
-    <SHFBSchemaVersion>1.9.0.0</SHFBSchemaVersion>
+    <SHFBSchemaVersion>1.9.3.0</SHFBSchemaVersion>
     <!-- AssemblyName, Name, and RootNamespace are not used by SHFB but Visual
          Studio adds them anyway -->
     <AssemblyName>Documentation</AssemblyName>
@@ -18,9 +19,9 @@
     <HtmlHelpName>Documentation</HtmlHelpName>
     <Language>en-US</Language>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\SSQE\bin\Debug\SSQE.dll" xmlns="" />
-<DocumentationSource sourceFile="..\SSQE\bin\Debug\SSQE.XML" xmlns="" /></DocumentationSources>
-    <FrameworkVersion>4.0.30319</FrameworkVersion>
+      <DocumentationSource sourceFile="..\SQLite.Dynamic.Data\bin\Debug\SQLite.Dynamic.Data.dll" />
+<DocumentationSource sourceFile="..\SQLite.Dynamic.Data\bin\Debug\SQLite.Dynamic.Data.xml" /></DocumentationSources>
+    <FrameworkVersion>.NET 4.0.30319</FrameworkVersion>
     <ProjectSummary>Query engine for sqlite 3. Idea inspired by SQLCE quering. Not need to object mapping and classes.</ProjectSummary>
     <CopyrightHref>beardeddev.pp.ua</CopyrightHref>
     <CopyrightText>Developed by beardeddev.pp.ua</CopyrightText>
@@ -30,7 +31,7 @@
     <RootNamespaceTitle>Simple query engine for SQLite</RootNamespaceTitle>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="(global)" isDocumented="False" />
-<NamespaceSummaryItem name="SSQE" isDocumented="True">&lt;h3&gt;Simple query engine for SQLite 3&lt;/h3&gt;
+      <NamespaceSummaryItem name="SQLite.Dynamic.Data" isDocumented="True">&lt;h3&gt;Simple query engine for SQLite 3&lt;/h3&gt;
 
 Query engine for sqlite 3. Idea inspired by SQLCE quering. Not need to object mapping and classes.
 Uses simple quering and dynamic property creation from query resul tset schema based on System.Dynamic.
@@ -53,7 +54,7 @@ Required:
 to contructor in base class as follwing:
 
 &lt;code&gt; 
-public class DemoDb : SSQE.Database
+public class DemoDb : SQLite.Dynamic.Data.Database
 {
         public DemoDb()
             : base("demo")
@@ -108,7 +109,8 @@ foreach (var r in res)
 {
      Console.WriteLine("{0}\t{1}\t...", r.id, r.title);
 }
-&lt;/code&gt;</NamespaceSummaryItem></NamespaceSummaries>
+&lt;/code&gt;</NamespaceSummaryItem>
+    </NamespaceSummaries>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in
        order for Visual Studio to perform the build.  The others are optional
