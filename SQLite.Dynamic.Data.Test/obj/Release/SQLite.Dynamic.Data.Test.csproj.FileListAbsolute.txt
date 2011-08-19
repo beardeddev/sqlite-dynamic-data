@@ -1,0 +1,10 @@
+E:\Probes\SQLite.Dynamic.Data\SQLite.Dynamic.Data.Test\bin\Release\SQLite.Dynamic.Data.Test.dll.config
+E:\Probes\SQLite.Dynamic.Data\SQLite.Dynamic.Data.Test\bin\Release\SQLite.Dynamic.Data.Test.dll
+E:\Probes\SQLite.Dynamic.Data\SQLite.Dynamic.Data.Test\bin\Release\SQLite.Dynamic.Data.Test.pdb
+E:\Probes\SQLite.Dynamic.Data\SQLite.Dynamic.Data.Test\bin\Release\SQLite.Dynamic.Data.dll
+E:\Probes\SQLite.Dynamic.Data\SQLite.Dynamic.Data.Test\bin\Release\xunit.dll
+E:\Probes\SQLite.Dynamic.Data\SQLite.Dynamic.Data.Test\bin\Release\System.Data.SQLite.dll
+E:\Probes\SQLite.Dynamic.Data\SQLite.Dynamic.Data.Test\bin\Release\SQLite.Dynamic.Data.pdb
+E:\Probes\SQLite.Dynamic.Data\SQLite.Dynamic.Data.Test\obj\Release\ResolveAssemblyReference.cache
+E:\Probes\SQLite.Dynamic.Data\SQLite.Dynamic.Data.Test\obj\Release\SQLite.Dynamic.Data.Test.dll
+E:\Probes\SQLite.Dynamic.Data\SQLite.Dynamic.Data.Test\obj\Release\SQLite.Dynamic.Data.Test.pdb

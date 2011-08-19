@@ -1,0 +1,284 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SQLite.Dynamic.Data</name>
+    </assembly>
+    <members>
+        <member name="T:SQLite.Dynamic.Data.QueryResult">
+            <summary>
+            Dynamic query result class
+            </summary>
+        </member>
+        <member name="F:SQLite.Dynamic.Data.QueryResult.properties">
+            <summary>
+            Values holder dictionary
+            </summary>
+        </member>
+        <member name="M:SQLite.Dynamic.Data.QueryResult.TrySetMember(System.Dynamic.SetMemberBinder,System.Object)">
+            <summary>
+            Provides the implementation for operations that set member values. 
+            Classes derived from the DynamicObject class can override this method to specify dynamic behavior for operations such as setting 
+            a value for a property.
+            </summary>
+            <param name="binder">
+            Provides information about the object that called the dynamic operation. 
+            The binder.Name property provides the name of the member to which the value is being assigned. 
+            For example, for the statement sampleObject.SampleProperty = "Test", where sampleObject is an instance of the class derived from the 
+            DynamicObject class, binder.Name returns "SampleProperty". 
+            The binder.IgnoreCase property specifies whether the member name is case-sensitive.
+            </param>
+            <param name="value">
+            he value to set to the member. For example, for sampleObject.SampleProperty = "Test",
+            where sampleObject is an instance of the class derived from the DynamicObject class, the value is "Test".
+            </param>
+            <returns>
+            rue if the operation is successful; otherwise, false. 
+            If this method returns false, the run-time binder of the language determines the behavior. 
+            (In most cases, a language-specific run-time exception is thrown.)
+            </returns>
+        </member>
+        <member name="M:SQLite.Dynamic.Data.QueryResult.TryGetMember(System.Dynamic.GetMemberBinder,System.Object@)">
+            <summary>
+            Provides the implementation for operations that get member values. 
+            Classes derived from the DynamicObject class can override this method to specify dynamic behavior 
+            for operations such as getting a value for a property.
+            </summary>
+            <param name="binder">
+            Provides information about the object that called the dynamic operation. 
+            The binder.Name property provides the name of the member on which the dynamic operation is performed. 
+            For example, for the Console.WriteLine(sampleObject.SampleProperty) statement, 
+            where sampleObject is an instance of the class derived from the DynamicObject class, 
+            binder.Name returns "SampleProperty". 
+            The binder.IgnoreCase property specifies whether the member name is case-sensitive.
+            </param>
+            <param name="result">
+            The result of the get operation. For example, if the method is called for a property, you can assign the property value to result.
+            </param>
+            <returns>
+            true if the operation is successful; otherwise, false. 
+            If this method returns false, the run-time binder of the language determines the behavior. 
+            (In most cases, a run-time exception is thrown.)
+            </returns>
+        </member>
+        <member name="M:SQLite.Dynamic.Data.QueryResult.#ctor">
+            <summary>
+            Creates new instance of query result dynamic object
+            </summary>
+        </member>
+        <member name="M:SQLite.Dynamic.Data.QueryResult.#ctor(System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Set the properties from exturnal dictionary
+            </summary>
+            <param name="properties"></param>
+        </member>
+        <member name="T:SQLite.Dynamic.Data.Database">
+            <summary>
+            Base class for querying the database
+            </summary>
+        </member>
+        <member name="M:SQLite.Dynamic.Data.Database.GetCommand(System.Data.SQLite.SQLiteConnection,System.String,System.Object[])">
+            <summary>
+            Get instance of SQLiteCommand with query params
+            </summary>
+            <param name="conn">Connection to database</param>
+            <param name="query">SQL Query string</param>
+            <param name="parameters">Query parameters</param>
+            <returns>Instance of SQLiteCommand to be executed</returns>
+        </member>
+        <member name="M:SQLite.Dynamic.Data.Database.#ctor(System.String)">
+            <summary>
+            Creates new instance of database for querying
+            </summary>
+            <param name="connStringName">Name of connection string</param>
+            <example>
+            <code>
+            public class DemoDb : SQLite.Dynamic.Data.Database
+            {
+                public DemoDb()
+                    : base("demo")
+                {
+                }
+            }
+            </code>
+            <remarks>
+            &lt;connectionStrings&gt;
+            &lt;add name="test" connectionString="Data Source=:memory:;New=True;Pooling=True;Max Pool Size=1;Journal Mode=Off;Version=3;" /&gt;
+            &lt;/connectionStrings&gt;
+            </remarks>
+            </example>
+        </member>
+        <member name="M:SQLite.Dynamic.Data.Database.Open(System.String)">
+             <summary>
+             Open database by connection string name and return new instance of database for querying
+             </summary>
+             <param name="connStringName">Name of connection string</param>
+             <returns>Instance of database for querying</returns>
+             <example>
+             <code>
+             var db = Database.Open("test");
+             </code>
+            <remarks>
+             &lt;connectionStrings&gt;
+             &lt;add name="test" connectionString="Data Source=:memory:;New=True;Pooling=True;Max Pool Size=1;Journal Mode=Off;Version=3;" /&gt;
+             &lt;/connectionStrings&gt;
+            </remarks>
+             </example>
+        </member>
+        <member name="M:SQLite.Dynamic.Data.Database.Query(System.String,System.Object[])">
+            <summary>
+            Run query against database
+            </summary>
+            <param name="query">Query string</param>
+            <param name="parameters">Parameters for query command</param>
+            <returns>Dynamic result set object of query</returns>
+            <example>
+            <code>
+            var db = Database.Open("demo");
+            
+            var ruby = db.Query("SELECT * FROM dictionary WHERE title = @0", "Ruby");
+            foreach (var r in ruby)
+            {
+                Console.WriteLine("{0}\t{1}\t...", r.id, r.title);
+            }
+            </code>
+            </example>
+        </member>
+        <member name="M:SQLite.Dynamic.Data.Database.Query(System.String)">
+            <summary>
+            Run query against database
+            </summary>
+            <param name="query">Query string</param>
+            <returns>Dynamic result set object of query</returns>
+            <example>
+            <code>
+            var db = Database.Open("demo");
+            var res = db.Query("SELECT * FROM dictionary");
+            
+            foreach (var r in res)
+            {
+                Console.WriteLine("{0}\t{1}\t...", r.id, r.title);
+            }
+            </code>
+            </example>
+        </member>
+        <member name="M:SQLite.Dynamic.Data.Database.QueryScalar(System.String,System.Object[])">
+            <summary>
+            Executes the query, and returns the first column of the first row in the result set returned by the query. 
+            Additional columns or rows are ignored.
+            </summary>
+            <param name="query">Query string</param>
+            <param name="parameters">Parameters for query command</param>
+            <returns>
+            The first column of the first row in the result set, or a null reference (Nothing in Visual Basic) if the result set is empty.
+            Returns a maximum of 2033 characters.
+            </returns>
+            <example>
+            <code>
+            var db = Database.Open("demo");
+            var c = db.QueryScalar("SELECT COUNT(*) FROM dictionary WHERE title = @0", "ruby");
+            
+            Console.WriteLine("Count of record is {0}", c);
+            </code>
+            </example>
+        </member>
+        <member name="M:SQLite.Dynamic.Data.Database.QueryScalar(System.String)">
+            <summary>
+            Executes the query, and returns the first column of the first row in the result set returned by the query. 
+            Additional columns or rows are ignored.
+            </summary>
+            <param name="query">Query string</param>
+            <returns>
+            The first column of the first row in the result set, or a null reference (Nothing in Visual Basic) if the result set is empty.
+            Returns a maximum of 2033 characters.
+            </returns>
+            <example>
+            <code>
+            var db = Database.Open("demo");
+            var c = db.QueryScalar("SELECT COUNT(*) FROM dictionary");
+            
+            Console.WriteLine("Count of record is {0}", c);
+            </code>
+            </example>
+        </member>
+        <member name="M:SQLite.Dynamic.Data.Database.QuerySingle(System.String,System.Object[])">
+            <summary>
+            Executes the query, and returns the first row in the result set returned by the query. 
+            Additional rows are ignored.
+            </summary>
+            <param name="query">Query string</param>
+            <param name="parameters">Parameters for query command</param>
+            <returns>
+            The first row in the result set, or a null reference (Nothing in Visual Basic) if the result set is empty.
+            </returns>
+            <example>
+            <code>
+            var db = Database.Open("demo");
+            var c = db.QueryScalar("SELECT * FROM dictionary Where id = @0", 1);
+            
+            Console.WriteLine("First record ID is {0} and title is {2}", c.Id, c.Title);
+            </code>
+            </example>
+        </member>
+        <member name="M:SQLite.Dynamic.Data.Database.QuerySingle(System.String)">
+            <summary>
+            Executes the query, and returns the first row in the result set returned by the query. 
+            Additional rows are ignored.
+            </summary>
+            <param name="query">Query string</param>
+            <returns>
+            The first row in the result set, or a null reference (Nothing in Visual Basic) if the result set is empty.
+            </returns>
+            <example>
+            <code>
+            var db = Database.Open("demo");
+            var c = db.QueryScalar("SELECT * FROM dictionary Where id = 1");
+            
+            Console.WriteLine("First record ID is {0} and title is {2}", c.Id, c.Title);
+            </code>
+            </example>
+        </member>
+        <member name="M:SQLite.Dynamic.Data.Database.Execute(System.String,System.Object[])">
+            <summary>
+            Executes query against database
+            </summary>
+            <param name="query">Query string</param>
+            <param name="parameters">Query command argumets</param>
+            <returns>Count of affected rows</returns>
+            <example>
+            <code>
+            var db = Database.Open("demo");
+            
+            int affectedRows = db.Execute("INSERT INTO dictionary(title, description) VALUES(@0, @1)",  
+            @"Java", 
+            @"Java is a programming language originally developed by 
+             James Gosling at Sun Microsystems (which is now a subsidiary 
+             of Oracle Corporation) and released in 1995 as a core component 
+             of Sun Microsystems' Java platform. The language derives much of 
+             its syntax from C and C++ but has a simpler object model and fewer 
+             low-level facilities.");
+            </code>
+            </example>
+        </member>
+        <member name="M:SQLite.Dynamic.Data.Database.Execute(System.String)">
+            <summary>
+            Executes query against database
+            </summary>
+            <param name="query">Query string</param>
+            <returns>Count of affected rows</returns>
+            <example>
+            <code>
+            var db = Database.Open("demo");
+            
+            db.Execute(@"CREATE TABLE dictionary(
+                               id INTEGER PRIMARY KEY AUTOINCREMENT,
+                               title VARCHAR(256),
+                               description TEXT
+                            )
+                            ;");
+            
+            Console.WriteLine("Table created");
+            </code>
+            </example>
+        </member>
+    </members>
+</doc>
