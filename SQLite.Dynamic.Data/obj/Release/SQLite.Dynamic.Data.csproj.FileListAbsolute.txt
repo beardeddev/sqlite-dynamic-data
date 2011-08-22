@@ -1,6 +1,0 @@
-E:\Probes\SQLite.Dynamic.Data\SQLite.Dynamic.Data\bin\Release\SQLite.Dynamic.Data.dll
-E:\Probes\SQLite.Dynamic.Data\SQLite.Dynamic.Data\bin\Release\SQLite.Dynamic.Data.pdb
-E:\Probes\SQLite.Dynamic.Data\SQLite.Dynamic.Data\bin\Release\System.Data.SQLite.dll
-E:\Probes\SQLite.Dynamic.Data\SQLite.Dynamic.Data\obj\Release\ResolveAssemblyReference.cache
-E:\Probes\SQLite.Dynamic.Data\SQLite.Dynamic.Data\obj\Release\SQLite.Dynamic.Data.dll
-E:\Probes\SQLite.Dynamic.Data\SQLite.Dynamic.Data\obj\Release\SQLite.Dynamic.Data.pdb

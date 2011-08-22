@@ -1,6 +1,15 @@
+.gitignore
 SQLite.Dynamic.Data.Test/bin
 SQLite.Dynamic.Data.Test/obj
 SQLite.Dynamic.Data/bin
 SQLite.Dynamic.Data/obj
 SQLite.Dynamic.Data.Demo/bin
 SQLite.Dynamic.Data.Demo/obj
+/SQLite.Dynamic.Data/bin
+/SQLite.Dynamic.Data/obj
+/SQLite.Dynamic.Data.Demo/bin
+/SQLite.Dynamic.Data.Demo/obj
+/SQLite.Dynamic.Data.Test/bin
+/SQLite.Dynamic.Data.Test/obj
+/SQLite.Dynamic.Data.Test/obj
+/SQLite.Dynamic.Data.Test/bin
