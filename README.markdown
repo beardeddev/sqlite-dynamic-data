@@ -78,7 +78,7 @@ var res = db.Query("SELECT * FROM links");
 var res = db.QuerySingle("SELECT * FROM links WHERE id = @0", 1);
 ```
 
-**Open another datbase in runtime and run query**
+**Open another database in runtime and run query**
 ```csharp
 var db = Database.Open("other");
 var res db.QueryScalar("SELECT COUNT(id) FROM posts where status = @0", true)
